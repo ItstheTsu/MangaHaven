@@ -2,7 +2,7 @@
 
 **Manga Haven** é uma plataforma online para leitura de mangás com uma interface limpa, rápida e responsiva. Explore uma ampla variedade de títulos populares e descubra novas histórias todos os dias.
 
-![Manga Haven Banner](../MangaHavenUPDT/img/assets/Banners/Omniscient%20Reader's%20Viewpoint.webp)
+![Manga Haven Banner](./img/assets/Banners/Omniscient%20Reader's%20Viewpoint.webp)
 
 ---
 
