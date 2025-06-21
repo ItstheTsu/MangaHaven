@@ -1,18 +1,14 @@
 {
-  "dependencies": {
-    "bootstrap": "^5.3.7",
-    "react-helmet": "^6.1.0"
-  },
   "name": "mangahavenupdt",
   "description": "**Manga Haven** é uma plataforma online para leitura de mangás com uma interface limpa, rápida e responsiva. Explore uma ampla variedade de títulos populares e descubra novas histórias todos os dias.",
   "version": "1.0.0",
   "main": "App.js",
   "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "keywords": [
     "manga",
     "mangá",
@@ -23,7 +19,12 @@
     "rápida",
     "responsiva"
   ],
-  "homepage": "
+  "dependencies": {
+    "bootstrap": "^5.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "ItstheTsu"
