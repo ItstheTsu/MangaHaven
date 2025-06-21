@@ -1,5 +1,19 @@
 {
   "dependencies": {
     "react-helmet": "^6.1.0"
-  }
+  },
+  "name": "mangahavenupdt",
+  "description": "**Manga Haven** é uma plataforma online para leitura de mangás com uma interface limpa, rápida e responsiva. Explore uma ampla variedade de títulos populares e descubra novas histórias todos os dias.",
+  "version": "1.0.0",
+  "main": "App.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "minor test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ItstheTsu"
+  },
+  "author": "Tsu",
+  "license": "ISC"
 }
