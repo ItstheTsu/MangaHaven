@@ -8,8 +8,22 @@
   "version": "1.0.0",
   "main": "App.js",
   "scripts": {
-    "test": "minor test"
-  },
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+},
+  "keywords": [
+    "manga",
+    "mangá",
+    "leitura",
+    "online",
+    "plataforma",
+    "interface",
+    "rápida",
+    "responsiva"
+  ],
+  "homepage": "
   "repository": {
     "type": "git",
     "url": "ItstheTsu"
