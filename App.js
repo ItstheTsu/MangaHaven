@@ -2,12 +2,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Index from './pages/index';
-import AboutUs from './pages/AboutUs';
-import Contact from './pages/Contact';
+import Index from './src/index';
+import AboutUs from './src/AboutUs';
+import Contact from './src/Contact';
 import Mangas from './pages/Mangas';
 import Manhwas from './pages/Manhwas';
-import MyList from './pages/MyList';
+import MyList from './src/MyList';
 
 function App() {
   return (
