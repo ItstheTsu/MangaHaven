@@ -1,0 +1,129 @@
+@use 'abstracts' as *;
+
+.chart {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+}
+
+.yAxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: clamp(120px, 28cqi, 180px);
+  // compensa meia altura do texto para alinhar com as linhas de grade
+  margin-block: -0.4em;
+  font-family: $font-mono;
+  font-size: 0.625rem;
+  color: $text-muted;
+  text-align: right;
+}
+
+.plotWrap {
+  min-width: 0;
+}
+
+.plot {
+  position: relative;
+  height: clamp(120px, 28cqi, 180px);
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.gridLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(148, 170, 230, 0.1);
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.line {
+  fill: none;
+  stroke: $color-sky-400;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.endDot,
+.marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: $color-sky-300;
+  box-shadow: 0 0 0 2px $color-navy-900;
+}
+
+.endDot {
+  box-shadow:
+    0 0 0 2px $color-navy-900,
+    0 0 14px rgba(56, 189, 248, 0.9);
+}
+
+.crosshair {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(148, 170, 230, 0.4);
+  pointer-events: none;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  border-radius: $radius-sm;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  color: $text-secondary;
+  background: rgba(8, 13, 27, 0.95);
+  border: 1px solid $border-strong;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.9);
+  transform: translate(12px, -50%);
+  pointer-events: none;
+
+  strong {
+    color: $text-primary;
+    font-weight: 600;
+  }
+}
+
+.tooltipLeft {
+  transform: translate(calc(-100% - 12px), -50%);
+}
+
+.xAxis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: $font-mono;
+  font-size: 0.625rem;
+  color: $text-muted;
+
+  span {
+    width: 0;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.xOdd {
+  @container (max-width: 520px) {
+    visibility: hidden;
+  }
+}

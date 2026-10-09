@@ -1,0 +1,80 @@
+@use 'abstracts' as *;
+
+.solutions {
+  position: relative;
+  isolation: isolate;
+  padding-block: $section-padding-y;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  top: 10%;
+  left: 50%;
+  width: min(1100px, 140vw);
+  height: 600px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(36, 84, 211, 0.22), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: space(6);
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+
+  @include up(lg) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.allLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  min-height: 44px;
+  padding-inline: 2px;
+  font-size: $fs-sm;
+  font-weight: 600;
+  color: $color-sky-300;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(125, 211, 252, 0.35);
+  transition:
+    color $duration-fast $ease-out,
+    border-color $duration-fast $ease-out;
+
+  &:hover {
+    color: $text-primary;
+    border-color: $text-primary;
+  }
+
+  @include up(lg) {
+    align-self: flex-end;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: space(4);
+  grid-template-columns: minmax(0, 1fr);
+
+  @include up(sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include up(xl) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+// cada item estica o card para alinhar alturas em uma mesma linha
+.item {
+  display: flex;
+  min-width: 0;
+}

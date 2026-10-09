@@ -1,0 +1,105 @@
+@use 'abstracts' as *;
+
+.item {
+  border-radius: $radius-lg;
+  background: $surface-1;
+  border: 1px solid $border-subtle;
+  transition:
+    border-color $duration-base $ease-out,
+    background-color $duration-base $ease-out;
+
+  &:hover {
+    border-color: $border-strong;
+  }
+}
+
+.open {
+  background: rgba(36, 84, 211, 0.1);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.heading {
+  font-family: $font-sans;
+  font-size: inherit;
+  letter-spacing: 0;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: space(4);
+  width: 100%;
+  min-height: 64px;
+  padding: space(4) space(5);
+  border-radius: inherit;
+  text-align: left;
+  font-size: $fs-base;
+  font-weight: 600;
+  line-height: 1.4;
+  color: $text-primary;
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+}
+
+.question {
+  min-width: 0;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: $color-sky-300;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  transition:
+    transform $duration-base $ease-out,
+    background $duration-base $ease-out,
+    color $duration-base $ease-out;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .open & {
+    transform: rotate(45deg);
+    color: $color-white;
+    background: $color-blue-600;
+  }
+}
+
+// Altura animada com grid-template-rows 0fr → 1fr (sem medir o DOM)
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows $duration-base $ease-out,
+    visibility 0s linear $duration-base;
+
+  .open & {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition:
+      grid-template-rows $duration-base $ease-out,
+      visibility 0s linear 0s;
+  }
+}
+
+.inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.answer {
+  padding: 0 space(5) space(5);
+  color: $text-secondary;
+  max-width: 68ch;
+}

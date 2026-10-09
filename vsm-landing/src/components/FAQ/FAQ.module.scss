@@ -1,0 +1,58 @@
+@use 'abstracts' as *;
+
+.faq {
+  padding-block: $section-padding-y;
+  border-top: 1px solid $border-subtle;
+  background: linear-gradient(180deg, rgba(16, 29, 70, 0.25), transparent 50%);
+}
+
+.layout {
+  display: grid;
+  gap: space(10);
+
+  @include up(lg) {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: space(16);
+    align-items: start;
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: space(6);
+
+  @include up(lg) {
+    position: sticky;
+    top: calc(#{$header-height} + 48px);
+  }
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: $fs-sm;
+  font-weight: 600;
+  color: $color-sky-300;
+  border-bottom: 1px solid rgba(125, 211, 252, 0.35);
+  transition: color $duration-fast $ease-out;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: $text-primary;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: space(3);
+  min-width: 0;
+}

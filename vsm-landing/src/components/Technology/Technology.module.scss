@@ -1,0 +1,133 @@
+@use 'abstracts' as *;
+
+.technology {
+  position: relative;
+  isolation: isolate;
+  padding-block: $section-padding-y;
+  background: linear-gradient(180deg, $color-navy-850 0%, $color-navy-950 100%);
+  border-block: 1px solid $border-subtle;
+  overflow: hidden;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  @include dot-grid(rgba(148, 170, 230, 0.1), 22px);
+  mask-image: radial-gradient(ellipse 70% 60% at 75% 50%, #000, transparent 75%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -10%;
+    top: 15%;
+    width: 60%;
+    height: 70%;
+    background: radial-gradient(ellipse, rgba(36, 84, 211, 0.3), transparent 65%);
+    filter: blur(40px);
+  }
+}
+
+.layout {
+  display: grid;
+  gap: clamp(2.5rem, 2rem + 3vw, 4rem);
+  align-items: center;
+
+  @include up(xl) {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: space(8);
+  min-width: 0;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: space(2);
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: $radius-pill;
+  font-size: $fs-sm;
+  font-weight: 500;
+  color: $text-secondary;
+  background: $surface-1;
+  border: 1px solid $border-subtle;
+  transition:
+    color $duration-fast $ease-out,
+    background-color $duration-fast $ease-out,
+    border-color $duration-fast $ease-out,
+    box-shadow $duration-base $ease-out;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    color: $text-muted;
+    transition: color $duration-fast $ease-out;
+  }
+
+  &:hover {
+    color: $text-primary;
+    border-color: $border-strong;
+  }
+
+  &[aria-selected='true'] {
+    color: $text-primary;
+    background: rgba(36, 84, 211, 0.28);
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 0 24px -8px rgba(56, 189, 248, 0.6);
+
+    svg {
+      color: $color-sky-300;
+    }
+  }
+}
+
+.panel {
+  position: relative;
+  padding: space(5) space(6);
+  border-radius: $radius-lg;
+  background: $surface-1;
+  border: 1px solid $border-subtle;
+  border-left: 3px solid $color-sky-400;
+  min-height: 9.5rem;
+}
+
+.panelTitle {
+  font-size: $fs-lg;
+  margin-bottom: space(2);
+
+  @include motion-ok {
+    animation: fade 420ms $ease-out;
+  }
+}
+
+.panelText {
+  color: $text-secondary;
+  font-size: $fs-sm;
+
+  @include up(md) {
+    font-size: $fs-base;
+  }
+}
+
+.demo {
+  min-width: 0;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

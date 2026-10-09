@@ -1,0 +1,212 @@
+@use 'abstracts' as *;
+
+.about {
+  position: relative;
+  padding-block: $section-padding-y;
+  background:
+    linear-gradient(180deg, transparent, rgba(16, 29, 70, 0.35) 40%, transparent),
+    $color-navy-900;
+  border-top: 1px solid $border-subtle;
+}
+
+.layout {
+  display: grid;
+  gap: space(12);
+
+  @include up(lg) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: space(16);
+    align-items: center;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: space(6);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: space(4);
+  color: $text-secondary;
+  font-size: $fs-md;
+  max-width: 60ch;
+}
+
+// ---- Bento de indicadores ---------------------------------------
+.bento {
+  display: grid;
+  gap: space(4);
+
+  @include up(sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: space(3);
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  border-radius: $radius-lg;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+  border: 1px solid $border-subtle;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  transition:
+    border-color $duration-base $ease-out,
+    transform $duration-base $ease-out;
+
+  &:hover {
+    border-color: $border-strong;
+  }
+}
+
+.cardFeatured {
+  @include up(sm) {
+    grid-column: 1 / -1;
+  }
+
+  background:
+    radial-gradient(90% 120% at 100% 0%, rgba(36, 84, 211, 0.4), transparent 60%),
+    linear-gradient(180deg, rgba(16, 29, 70, 0.9), rgba(11, 18, 38, 0.9));
+  border-color: rgba(107, 147, 255, 0.3);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    @include dot-grid(rgba(125, 211, 252, 0.12), 18px);
+    mask-image: linear-gradient(90deg, transparent 40%, #000);
+    pointer-events: none;
+  }
+
+  .cardValue {
+    font-size: clamp(2.75rem, 2rem + 3vw, 4rem);
+  }
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-md;
+  color: $color-sky-300;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.cardValue {
+  position: relative;
+  z-index: 1;
+  font-family: $font-display;
+  font-size: clamp(2rem, 1.6rem + 1.6vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.cardUnit {
+  display: block;
+  margin-top: 6px;
+  font-family: $font-sans;
+  font-size: $fs-sm;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $color-sky-300;
+}
+
+.cardText {
+  position: relative;
+  z-index: 1;
+  font-size: $fs-sm;
+  color: $text-secondary;
+}
+
+.timeline {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: space(3);
+  margin-top: space(2);
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $text-muted;
+}
+
+.timelineTrack {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  border-radius: $radius-pill;
+  background: rgba(148, 170, 230, 0.15);
+  overflow: hidden;
+}
+
+.timelineFill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, $color-blue-600, $color-sky-400);
+  transform-origin: left;
+
+  @include motion-ok {
+    transform: scaleX(0);
+    transition: transform 1.6s $ease-out 300ms;
+
+    [data-revealed='true'] & {
+      transform: scaleX(1);
+    }
+  }
+}
+
+// ---- Pilares ------------------------------------------------------
+.pillars {
+  display: grid;
+  gap: space(6) space(8);
+  margin-top: clamp(3rem, 2rem + 4vw, 5rem);
+  padding-top: clamp(2rem, 1.5rem + 2vw, 3rem);
+  border-top: 1px solid $border-subtle;
+
+  @include up(sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include up(lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  gap: space(2);
+}
+
+.pillarIcon {
+  width: 22px;
+  height: 22px;
+  color: $color-red-400;
+  margin-bottom: space(1);
+}
+
+.pillarTitle {
+  font-size: $fs-base;
+  letter-spacing: -0.01em;
+}
+
+.pillarText {
+  font-size: $fs-sm;
+  color: $text-secondary;
+}

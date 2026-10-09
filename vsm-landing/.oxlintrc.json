@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc", "jsx-a11y"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }],
+    "react/react-in-jsx-scope": "off",
+    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/anchor-is-valid": "error",
+    "jsx-a11y/aria-props": "error",
+    "jsx-a11y/aria-role": "error",
+    "jsx-a11y/role-has-required-aria-props": "error",
+    "jsx-a11y/no-noninteractive-tabindex": "error",
+    "jsx-a11y/heading-has-content": "error",
+    "jsx-a11y/html-has-lang": "error"
+  },
+  "ignorePatterns": ["dist"]
+}

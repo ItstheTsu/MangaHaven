@@ -1,0 +1,299 @@
+@use 'abstracts' as *;
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: space(3);
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  container-type: inline-size;
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.orbit {
+  fill: none;
+  stroke: rgba(107, 147, 255, 0.35);
+  stroke-width: 0.25;
+  stroke-dasharray: 0.6 1.4;
+}
+
+.orbitInner {
+  fill: none;
+  stroke: rgba(148, 170, 230, 0.12);
+  stroke-width: 0.2;
+}
+
+.link {
+  stroke-width: 0.35;
+}
+
+.pulse {
+  fill: none;
+  stroke: $color-sky-300;
+  stroke-width: 0.7;
+  stroke-linecap: round;
+  stroke-dasharray: 5 95;
+  stroke-dashoffset: 100;
+  opacity: 0;
+
+  @include motion-ok {
+    opacity: 1;
+    animation: travel 3.6s linear infinite;
+  }
+}
+
+// ---- Núcleo ---------------------------------------------------------
+.core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1cqi;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(56, 189, 248, 0.35), transparent 55%),
+    linear-gradient(160deg, #1a3aa0 0%, $color-navy-700 70%);
+  box-shadow:
+    0 0 0 1px rgba(125, 211, 252, 0.4),
+    0 0 60px rgba(36, 84, 211, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.coreRing {
+  position: absolute;
+  inset: -9%;
+  border-radius: 50%;
+  border: 1px dashed rgba(125, 211, 252, 0.45);
+
+  @include motion-ok {
+    animation: spin 28s linear infinite;
+  }
+}
+
+.coreMark {
+  width: 30%;
+  height: auto;
+}
+
+.coreLabel {
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: clamp(0.875rem, 4.2cqi, 1.5rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.coreCaption {
+  font-family: $font-mono;
+  font-size: clamp(0.5rem, 1.9cqi, 0.6875rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-sky-300;
+  line-height: 1;
+}
+
+// ---- Nós ------------------------------------------------------------
+.node {
+  // ponto de ancoragem de tamanho zero exatamente sobre a órbita
+  position: absolute;
+  width: 0;
+  height: 0;
+
+  @include motion-ok {
+    animation: node-in 700ms $ease-out both;
+    animation-delay: calc(500ms + var(--d, 0ms));
+  }
+}
+
+.nodeIcon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: max(9cqi, 34px);
+  height: max(9cqi, 34px);
+  border-radius: 30%;
+  color: $color-sky-300;
+  background: linear-gradient(160deg, rgba(23, 42, 94, 0.95), rgba(11, 18, 38, 0.95));
+  box-shadow:
+    0 0 0 1px rgba(107, 147, 255, 0.35),
+    0 8px 24px -8px rgba(0, 0, 0, 0.8),
+    0 0 24px -6px rgba(56, 189, 248, 0.45);
+
+  svg {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+.nodeLabel {
+  position: absolute;
+  left: 0;
+  top: calc(max(4.5cqi, 17px) + 6px);
+  transform: translateX(-50%);
+  display: none;
+  padding: 2px 8px;
+  border-radius: $radius-pill;
+  font-size: clamp(0.625rem, 2cqi, 0.75rem);
+  font-weight: 500;
+  white-space: nowrap;
+  color: $text-secondary;
+  background: rgba(8, 13, 27, 0.75);
+  border: 1px solid $border-subtle;
+
+  @container (min-width: 400px) {
+    display: block;
+  }
+}
+
+// ---- Painéis flutuantes --------------------------------------------
+.panel {
+  position: absolute;
+  display: none;
+  @include glass(0.72, 14px);
+  border-radius: $radius-md;
+  box-shadow: $shadow-float;
+
+  @container (min-width: 440px) {
+    display: flex;
+  }
+
+  @include motion-ok {
+    animation: float 7s $ease-in-out infinite alternate;
+  }
+}
+
+.panelTitle {
+  font-size: clamp(0.625rem, 2cqi, 0.75rem);
+  font-weight: 600;
+  color: $text-primary;
+  line-height: 1.2;
+}
+
+.panelSales {
+  top: 0;
+  left: 0;
+  width: 26%;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+.spark {
+  width: 100%;
+  height: 7cqi;
+}
+
+.panelBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 4cqi;
+
+  span {
+    flex: 1;
+    height: var(--h);
+    border-radius: 2px 2px 0 0;
+    background: rgba(107, 147, 255, 0.55);
+  }
+}
+
+.panelPix {
+  right: 0;
+  bottom: 2%;
+  width: 29%;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  animation-delay: -3s;
+}
+
+.pixIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 6.5cqi;
+  height: 6.5cqi;
+  border-radius: $radius-sm;
+  background: rgba(52, 211, 153, 0.14);
+  color: $status-good;
+
+  svg {
+    width: 60%;
+    height: 60%;
+  }
+}
+
+.pixText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.pixStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: clamp(0.5625rem, 1.8cqi, 0.6875rem);
+  color: $text-secondary;
+  line-height: 1.2;
+
+  svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    color: $status-good;
+  }
+}
+
+.caption {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $text-muted;
+  text-align: center;
+}
+
+@keyframes travel {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes node-in {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-8px);
+  }
+}

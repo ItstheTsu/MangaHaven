@@ -1,0 +1,126 @@
+@use 'abstracts' as *;
+
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border-radius: $radius-pill;
+  font-weight: 600;
+  font-size: $fs-sm;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  isolation: isolate;
+  transition:
+    transform $duration-fast $ease-out,
+    box-shadow $duration-base $ease-out,
+    background-color $duration-base $ease-out,
+    border-color $duration-base $ease-out,
+    color $duration-base $ease-out;
+
+  &:hover .icon {
+    transform: translateX(3px);
+  }
+
+  &:active {
+    transform: translateY(1px) scale(0.99);
+  }
+
+  @media (max-width: 359.98px) {
+    white-space: normal;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  transition: transform $duration-base $ease-out;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.lg {
+  min-height: 54px;
+  padding: 14px 28px;
+  font-size: $fs-base;
+}
+
+.primary {
+  color: $color-white;
+  background: $gradient-brand;
+  box-shadow:
+    0 0 0 1px rgba(125, 211, 252, 0.35) inset,
+    0 10px 30px -10px rgba(36, 84, 211, 0.85);
+
+  // camada de brilho no hover
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(135deg, $color-blue-500 0%, $color-sky-300 100%);
+    opacity: 0;
+    transition: opacity $duration-base $ease-out;
+  }
+
+  &:hover {
+    box-shadow:
+      0 0 0 1px rgba(125, 211, 252, 0.6) inset,
+      0 14px 40px -10px rgba(56, 189, 248, 0.7);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  // garante contraste do texto branco sobre o gradiente
+  .label {
+    text-shadow: 0 1px 1px rgba(8, 13, 27, 0.35);
+  }
+}
+
+.secondary {
+  color: $text-primary;
+  background: $surface-2;
+  border: 1px solid $border-strong;
+  backdrop-filter: blur(8px);
+
+  &:hover {
+    background: $surface-3;
+    border-color: rgba(125, 211, 252, 0.5);
+  }
+}
+
+.ghost {
+  color: $text-secondary;
+  padding-inline: 14px;
+
+  &:hover {
+    color: $text-primary;
+    background: $surface-2;
+  }
+}
+
+.light {
+  color: $color-navy-900;
+  background: $color-white;
+  box-shadow: 0 12px 36px -12px rgba(255, 255, 255, 0.45);
+
+  &:hover {
+    background: #e8f4ff;
+    box-shadow: 0 16px 44px -12px rgba(125, 211, 252, 0.65);
+  }
+
+  &:focus-visible {
+    outline-color: $color-white;
+  }
+}

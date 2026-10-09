@@ -1,0 +1,191 @@
+@use 'abstracts' as *;
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: $z-header;
+  width: 100%;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color $duration-base $ease-out,
+    border-color $duration-base $ease-out,
+    backdrop-filter $duration-base $ease-out;
+}
+
+.scrolled {
+  background: rgba(8, 13, 27, 0.78);
+  border-bottom-color: $border-subtle;
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: space(4);
+  height: $header-height;
+}
+
+.brand {
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: $radius-sm;
+  padding: 4px;
+  margin-left: -4px;
+}
+
+// ---- Navegação desktop ----------------------------------------
+.desktopNav {
+  display: none;
+
+  @include up(lg) {
+    display: block;
+  }
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  border-radius: $radius-pill;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid $border-subtle;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 16px;
+  border-radius: $radius-pill;
+  font-size: $fs-sm;
+  font-weight: 500;
+  color: $text-secondary;
+  transition:
+    color $duration-fast $ease-out,
+    background-color $duration-fast $ease-out;
+
+  &:hover {
+    color: $text-primary;
+    background: $surface-2;
+  }
+
+  &[aria-current='true'] {
+    color: $text-primary;
+    background: rgba(36, 84, 211, 0.22);
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.28) inset;
+  }
+}
+
+// ---- Ações -----------------------------------------------------
+.actions {
+  display: flex;
+  align-items: center;
+  gap: space(2);
+}
+
+.cta {
+  display: none;
+
+  @include up(md) {
+    display: block;
+  }
+}
+
+.toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-md;
+  color: $text-primary;
+  background: $surface-2;
+  border: 1px solid $border-subtle;
+  transition: background-color $duration-fast $ease-out;
+
+  &:hover {
+    background: $surface-3;
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  @include up(lg) {
+    display: none;
+  }
+}
+
+// ---- Painel mobile ---------------------------------------------
+.mobilePanel {
+  height: calc(100dvh - #{$header-height});
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid $border-subtle;
+  background:
+    radial-gradient(120% 60% at 100% 0%, rgba(36, 84, 211, 0.25), transparent 60%),
+    rgba(8, 13, 27, 0.97);
+
+  &[hidden] {
+    display: none;
+  }
+
+  > nav {
+    display: flex;
+    flex-direction: column;
+    gap: space(8);
+    padding-block: space(6) space(10);
+  }
+
+}
+
+.mobileList {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    border-bottom: 1px solid $border-subtle;
+
+    @include motion-ok {
+      animation: slide-in 420ms $ease-out both;
+      animation-delay: calc(var(--i) * 45ms);
+    }
+  }
+}
+
+.mobileLink {
+  display: flex;
+  align-items: center;
+  gap: space(4);
+  min-height: 60px;
+  font-family: $font-display;
+  font-size: $fs-lg;
+  font-weight: 600;
+  color: $text-secondary;
+
+  &:hover,
+  &[aria-current='true'] {
+    color: $text-primary;
+  }
+}
+
+.mobileIndex {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $color-sky-400;
+}
+
+.mobileCta {
+  width: 100%;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}

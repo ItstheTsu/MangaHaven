@@ -1,0 +1,119 @@
+// =============================================================
+// Design tokens — VSM Informática (interpretação conceitual)
+// Fonte única para cores, tipografia, espaçamento e breakpoints.
+// =============================================================
+
+@use 'sass:map';
+
+// ---- Cores base ------------------------------------------------
+$color-navy-950: #050912;
+$color-navy-900: #080d1b; // fundo principal
+$color-navy-850: #0b1226;
+$color-navy-800: #0e1730;
+$color-navy-700: #101d46; // azul profundo
+$color-navy-600: #172a5e;
+
+$color-blue-600: #2454d3; // azul tecnológico
+$color-blue-500: #3b6cf0;
+$color-blue-400: #6b93ff;
+$color-sky-400: #38bdf8; // azul elétrico
+$color-sky-300: #7dd3fc;
+
+$color-red-500: #e63946; // vermelho de destaque
+$color-red-400: #ff5c69;
+
+$color-white: #ffffff;
+
+// Texto (validado contra $color-navy-900 — ver README)
+$text-primary: #f3f6ff; // ~18:1
+$text-secondary: #b4bfdc; // ~10:1
+$text-muted: #8a97ba; // ~6.4:1
+
+// Status (reservado — sempre acompanhado de ícone + rótulo)
+$status-good: #34d399;
+$status-warning: #fbbf24;
+
+// Superfícies e bordas
+$surface-1: rgba(255, 255, 255, 0.03);
+$surface-2: rgba(255, 255, 255, 0.05);
+$surface-3: rgba(255, 255, 255, 0.08);
+$border-subtle: rgba(148, 170, 230, 0.12);
+$border-strong: rgba(148, 170, 230, 0.24);
+
+// Gradientes
+$gradient-brand: linear-gradient(135deg, $color-blue-600 0%, $color-sky-400 100%);
+$gradient-text: linear-gradient(100deg, #ffffff 0%, $color-sky-300 45%, $color-blue-400 100%);
+$gradient-accent: linear-gradient(135deg, $color-red-500 0%, #ff7a59 100%);
+
+// ---- Tipografia -----------------------------------------------
+$font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Sora Variable', 'Sora', $font-sans;
+$font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Menlo, monospace;
+
+// Escala fluida (min @ 320px → max @ 1440px)
+$fs-xs: 0.75rem;
+$fs-sm: 0.875rem;
+$fs-base: 1rem;
+$fs-md: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+$fs-lg: clamp(1.1875rem, 1.05rem + 0.6vw, 1.5rem);
+$fs-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+$fs-2xl: clamp(1.875rem, 1.35rem + 2.2vw, 3rem);
+$fs-3xl: clamp(2.125rem, 1.45rem + 2.9vw, 3.75rem);
+
+$lh-tight: 1.1;
+$lh-snug: 1.3;
+$lh-base: 1.65;
+
+// ---- Espaçamento (base 4px) ----------------------------------
+$space: (
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+  8: 2rem,
+  10: 2.5rem,
+  12: 3rem,
+  16: 4rem,
+  20: 5rem,
+  24: 6rem,
+);
+
+@function space($key) {
+  @return map.get($space, $key);
+}
+
+$section-padding-y: clamp(4.5rem, 3rem + 6vw, 8rem);
+$container-max: 1240px;
+$container-gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem);
+$header-height: 72px;
+
+// ---- Raios, sombras, transições ------------------------------
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 18px;
+$radius-xl: 26px;
+$radius-pill: 999px;
+
+$shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 40px -24px rgba(0, 0, 0, 0.7);
+$shadow-float: 0 30px 60px -30px rgba(2, 6, 20, 0.9), 0 0 0 1px $border-subtle;
+$shadow-glow-blue: 0 0 0 1px rgba(56, 189, 248, 0.25), 0 10px 40px -10px rgba(36, 84, 211, 0.6);
+
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+$ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+$duration-fast: 160ms;
+$duration-base: 260ms;
+$duration-slow: 600ms;
+
+// ---- Breakpoints (mobile-first) ------------------------------
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1600px,
+);
+
+$z-header: 100;
+$z-skip: 200;

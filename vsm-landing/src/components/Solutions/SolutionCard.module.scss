@@ -1,0 +1,175 @@
+@use 'abstracts' as *;
+
+.card {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: clamp(1.25rem, 1rem + 0.8vw, 1.6rem);
+  border-radius: $radius-lg;
+  background: linear-gradient(180deg, rgba(20, 32, 68, 0.75), rgba(11, 18, 38, 0.85));
+  border: 1px solid $border-subtle;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform $duration-base $ease-out,
+    border-color $duration-base $ease-out,
+    box-shadow $duration-base $ease-out;
+
+  // spotlight que segue o ponteiro
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(320px circle at var(--mx) var(--my), rgba(56, 189, 248, 0.14), transparent 60%);
+    opacity: 0;
+    transition: opacity $duration-base $ease-out;
+  }
+
+  // linha de luz no topo
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 16%;
+    right: 16%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.7), transparent);
+    opacity: 0.35;
+    transition: opacity $duration-base $ease-out;
+  }
+
+  &:hover,
+  &:focus-within {
+    border-color: rgba(107, 147, 255, 0.45);
+    box-shadow:
+      $shadow-card,
+      0 24px 50px -28px rgba(36, 84, 211, 0.8);
+
+    &::before,
+    &::after {
+      opacity: 1;
+    }
+
+    .icon {
+      color: $color-white;
+      background: $gradient-brand;
+      box-shadow: 0 8px 24px -8px rgba(56, 189, 248, 0.7);
+    }
+  }
+
+  @include motion-ok {
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: space(5);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-md;
+  color: $color-sky-300;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  transition:
+    color $duration-base $ease-out,
+    background $duration-base $ease-out,
+    box-shadow $duration-base $ease-out;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.index {
+  font-family: $font-mono;
+  font-size: $fs-xs;
+  color: $text-muted;
+}
+
+.category {
+  font-family: $font-mono;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-sky-300;
+}
+
+.title {
+  margin-top: space(2);
+  font-size: $fs-lg;
+}
+
+.description {
+  margin-top: space(3);
+  font-size: $fs-sm;
+  color: $text-secondary;
+}
+
+// destaques + link ficam ancorados na base: cards da mesma linha se alinham
+.footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding-top: space(5);
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: space(5);
+
+  li {
+    padding: 4px 10px;
+    border-radius: $radius-pill;
+    font-size: 0.75rem;
+    color: $text-secondary;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid $border-subtle;
+  }
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: space(4);
+  min-height: 44px;
+  border-top: 1px solid $border-subtle;
+  font-size: $fs-sm;
+  font-weight: 600;
+  color: $text-primary;
+  transition: color $duration-fast $ease-out;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform $duration-fast $ease-out;
+  }
+
+  &:hover {
+    color: $color-sky-300;
+
+    svg {
+      transform: translate(2px, -2px);
+    }
+  }
+}
